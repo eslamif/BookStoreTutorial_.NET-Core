@@ -38,6 +38,6 @@ namespace BookStoreTutorial.Models.DataLayer
 
         private string[] includes;
 
-        public string[] GetIncludes => includes ?? new string[0];
+        public string[] GetIncludes() => includes ?? new string[0];
     }
 }
