@@ -6,7 +6,6 @@
 
   <ItemGroup>
     <Folder Include="Areas\Admin\" />
-    <Folder Include="Models\DataLayer\Repositories\" />
     <Folder Include="Models\DataTransferObjects\" />
     <Folder Include="Models\ExtensionMethods\" />
     <Folder Include="Models\ViewModels\" />
