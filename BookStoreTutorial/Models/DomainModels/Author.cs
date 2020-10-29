@@ -20,6 +20,6 @@ namespace BookStoreTutorial.Models.DomainModels
         public string LastName { get; set; }
 
         public string FullName => $"{FirstName} {LastName}";
-        public ICollection<BookAuthors> BookAuthors { get; set; }    //nav property
+        public ICollection<BookAuthor> BookAuthors { get; set; }    //nav property
     }
 }

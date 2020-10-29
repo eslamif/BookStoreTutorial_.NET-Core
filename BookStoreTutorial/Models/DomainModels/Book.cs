@@ -21,7 +21,7 @@ namespace BookStoreTutorial.Models.DomainModels
         public string GenreId { get; set; }     //foreign key
 
         public Genre Genre { get; set; }        //nav property
-        public ICollection<BookAuthors> BookAuthors { get; set; }    //nav property
+        public ICollection<BookAuthor> BookAuthors { get; set; }    //nav property
 
     }
 }

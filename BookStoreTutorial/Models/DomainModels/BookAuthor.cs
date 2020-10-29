@@ -8,7 +8,7 @@ namespace BookStoreTutorial.Models.DomainModels
     /// <summary>
     /// Many to many relatipnship between Author and Book
     /// </summary>
-    public class BookAuthors
+    public class BookAuthor
     {
         public int BookId { get; set; }
         public int AuthorId { get; set; }
