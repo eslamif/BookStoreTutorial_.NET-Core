@@ -20,45 +20,28 @@ namespace BookStoreTutorial.Models.DataLayer.Repositories
 
         public int Count => count ?? dbSet.Count();
 
-        public void Delete(T entity)
-        {
-            throw new NotImplementedException();
+        public virtual void Delete(T entity) => dbSet.Remove(entity);
+
+        public virtual T Get(QueryOptions<T> options) {
+            IQueryable<T> query = BuildQuery(options);
+            return query.FirstOrDefault();
         }
 
-        public T Get(QueryOptions<T> options)
+        public virtual T Get(int id) => dbSet.Find(id);
+
+        public virtual T Get(string id) => dbSet.Find(id);
+
+        public virtual void Insert(T entity) => dbSet.Add(entity);
+
+        public virtual IEnumerable<T> List(QueryOptions<T> options)
         {
-            throw new NotImplementedException();
+            IQueryable<T> query = BuildQuery(options);
+            return query.ToList();
         }
 
-        public T Get(int id)
-        {
-            throw new NotImplementedException();
-        }
+        public virtual void Save() => context.SaveChanges();
 
-        public T Get(string id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Insert(T entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<T> List(QueryOptions<T> options)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Save()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Update(T entity)
-        {
-            throw new NotImplementedException();
-        }
+        public virtual void Update(T entity) => dbSet.Update(entity);
 
         private IQueryable<T> BuildQuery(QueryOptions<T> options)
         {
