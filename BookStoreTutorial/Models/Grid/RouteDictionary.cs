@@ -46,6 +46,31 @@ namespace BookStoreTutorial.Models.Grid {
             return clone;
         }
 
+        public string GenreFilter {
+            get => Get(nameof(BookGridDTO.Genre))?.Replace(FilterPrefix.Genre, "");
+            set => this[nameof(BookGridDTO.Genre)] = value;
+        }
+
+        public string PriceFilter {
+            get => Get(nameof(BookGridDTO.Price))?.Replace(FilterPrefix.Price, "");
+            set => this[nameof(BookGridDTO.Price)] = value;
+        }
+        public string AuthorFilter {
+            // author filter contains prefix, author id, and slug (eg, author-8-ta-nehisi-coates).
+            // only need author id for filtering, so first remove 'author-' prefix from string. At
+            // that point, the authorid will be at beginning of string. So find index of dash after 
+            // id number and then return substring from beginning of string to that index.
+            get {
+                string s = Get(nameof(BookGridDTO.Author))?.Replace(FilterPrefix.Author, "");
+                int index = s?.IndexOf('-') ?? -1;
+                return (index == -1) ? s : s.Substring(0, index);
+            }
+
+            set => this[nameof(BookGridDTO.Author)] = value;
+        }
+
+        public void ClearFilters() => GenreFilter = PriceFilter = AuthorFilter = BookGridDTO.DefaultFilter;
+
         private string Get(string key) => Keys.Contains(key) ? this[key] : null;
     }
 }
