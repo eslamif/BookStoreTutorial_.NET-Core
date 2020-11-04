@@ -9,6 +9,8 @@
 <h1>Book Catalog</h1>
 
 <div class="row">
+
+    @* Main Filters *@
     <div class="col-9">
         <form asp-controller="Book" asp-action="Filter" method="post" class="form-inline">
 
@@ -36,6 +38,15 @@
             @* CRUD Buttons *@
             <button type="submit" class="btn btn-primary mr-2">Filter</button>
             <button type="submit" class="btn btn-primary" name="clear" value="true">Clear</button>
+        </form>
+    </div>
+
+    @* Page Size Filters *@
+    <div class="col">
+        <form asp-controller="Book" asp-action="PageSize" method="post" class="form-inline">
+            <label>Page Size:</label>
+            <select name="PageSize" class="form-control m-2" asp-items="@(new SelectList(Model.PageSizes, current.PageSize))"></select>
+            <button type="submit" class="btn btn-primary mr-2">Save</button>
         </form>
     </div>
 </div>
