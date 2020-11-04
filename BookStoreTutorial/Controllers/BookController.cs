@@ -45,5 +45,16 @@ namespace BookStoreTutorial.Controllers
 
             return View(vm);
         }
+
+        public ViewResult Details(int id)
+        {
+            var book = data.Books.Get(new QueryOptions<Book>
+            {
+                Includes = "BookAuthors.Author, Genre",
+                Where = b => b.BookId == id
+            });
+
+            return View(book);
+        }
     }
 }
