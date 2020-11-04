@@ -6,6 +6,7 @@ using BookStoreTutorial.Models.DataLayer;
 using BookStoreTutorial.Models.DataLayer.Repositories;
 using BookStoreTutorial.Models.DataTransferObjects;
 using BookStoreTutorial.Models.DomainModels;
+using BookStoreTutorial.Models.ExtensionMethods;
 using BookStoreTutorial.Models.Grid;
 using BookStoreTutorial.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
@@ -55,6 +56,26 @@ namespace BookStoreTutorial.Controllers
             });
 
             return View(book);
+        }
+
+        [HttpPost]
+        public RedirectToActionResult Filter(string[] filter, bool clear = false)
+        {
+            var builder = new BooksGridBuilder(HttpContext.Session);
+
+            if (clear)
+            {
+                builder.ClearFilterSegments();
+            }
+            else
+            {
+                var author = data.Authors.Get(filter[0].ToInt());
+                builder.CurrentRoute.PageNumber = 1;
+                builder.LoadFilterSegments(filter, author);
+            }
+
+            builder.SaveRouteSegment();
+            return RedirectToAction("List", builder.CurrentRoute);
         }
     }
 }
