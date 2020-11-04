@@ -50,3 +50,36 @@
         </form>
     </div>
 </div>
+
+@* Add to Cart *@
+<form asp-controller="Cart" asp-action="Add" method="Post">
+    <table class="table table-bordered table-striped table-sm">
+        <thead class="thead-dark">
+            <tr>
+                @*Title*@
+                <th>
+                    @{ routes.SetSortAndDirection(nameof(BookStoreTutorial.Models.DomainModels.Book.Title), current); }
+                    <a asp-controller="Book" asp-action="List" asp-all-route-data="@routes" class="text-white">Title</a>
+                </th>
+
+                @* Author *@
+                <th>Author(S)</th>
+
+                @* Genre *@
+                <th>
+                    @{ routes.SetSortAndDirection(nameof(BookStoreTutorial.Models.DomainModels.Genre), current); }
+                    <a asp-controller="Book" asp-action="List" asp-all-route-data="@routes" class="text-white">Genre</a>
+                </th>
+
+                @* Price *@
+                <th>
+                    @{ routes.SetSortAndDirection(nameof(BookStoreTutorial.Models.DomainModels.Book.Price), current); }
+                    <a asp-controller="Book" asp-action="List" asp-all-route-data="@routes" class="text-white">Price</a>
+                </th>
+
+                @* CRUD Buttons *@
+                <th></th>
+            </tr>
+        </thead>
+    </table>
+</form>
