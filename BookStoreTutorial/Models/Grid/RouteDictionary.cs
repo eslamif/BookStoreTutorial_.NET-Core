@@ -28,11 +28,13 @@ namespace BookStoreTutorial.Models.Grid {
         }
         
         public void SetSortAndDirection(string fieldName, RouteDictionary currentRoute) {
+            this[nameof(GridDTO.SortField)] = fieldName;
+
             if (currentRoute.SortField.EqualNoCase(fieldName) && currentRoute.SortDirection == "asc") {
-                this[nameof(GridDTO.SortField)] = "desc";
+                this[nameof(GridDTO.SortDirection)] = "desc";
             }
             else {
-                this[nameof(GridDTO.SortField)] = "asc";
+                this[nameof(GridDTO.SortDirection)] = "asc";
             }
         }
 

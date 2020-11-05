@@ -25,6 +25,7 @@ namespace BookStoreTutorial.Models.Grid {
             Routes.PageNumber = grid.PageNumber;
             Routes.PageSize = grid.PageSize;
             Routes.SortField = grid.SortField ?? defaultSortField;
+            Routes.SortDirection = grid.SortDirection;
 
             SaveRouteSegment();
         }
