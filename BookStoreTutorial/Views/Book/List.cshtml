@@ -77,9 +77,37 @@
                     <a asp-controller="Book" asp-action="List" asp-all-route-data="@routes" class="text-white">Price</a>
                 </th>
 
-                @* CRUD Buttons *@
                 <th></th>
             </tr>
         </thead>
+
+        <tbody>
+            @foreach(BookStoreTutorial.Models.DomainModels.Book book in Model.Books)
+            {
+                <tr>
+                    @* Book Title *@
+                    <td>
+                        <a asp-controller="Book" asp-action="Details" asp-route-id="@book.BookId">@book.Title</a>
+                    </td>
+
+                    @* Author *@
+                    <td>
+                        @foreach(var ba in book.BookAuthors)
+                        {
+                            <p>
+                                <a asp-controller="Author" asp-action="Details" asp-route-id="@ba.AuthorId">@ba.Author.FullName</a>
+                            </p>
+                        }
+                    </td>
+
+                    <td>@book.Genre.Name</td>
+                    <td>@book.Price.ToString("c")</td>
+                    
+                    <td>
+                        <button type="submit" name="id" value="@book.BookId" class="btn btn-primary">Add to Cart</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
     </table>
 </form>

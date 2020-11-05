@@ -28,14 +28,14 @@ namespace BookStoreTutorial.Models.DataLayer
                 {
                     Where = b => b.Price < 7;
                 }
-            }
-            else if (builder.CurrentRoute.PriceFilter == "7to14") 
-            {
-                Where = b => b.Price >= 7 && b.Price <= 14;
-            }
-            else
-            {
-                Where = b => b.Price > 14;
+                else if (builder.CurrentRoute.PriceFilter == "7to14")
+                {
+                    Where = b => b.Price >= 7 && b.Price <= 14;
+                }
+                else
+                {
+                    Where = b => b.Price > 14;
+                }
             }
 
             //Author filter
