@@ -111,3 +111,14 @@
         </tbody>
     </table>
 </form>
+
+@* Pagination *@
+@{ 
+    routes = Model.CurrentRoute.Clone();
+
+    for (int i = 1; i <= Model.TotalPages; i++)
+    {
+        routes.PageNumber = i;
+        <a asp-controller="Book" asp-action="List" asp-all-route-data="@routes" class="btn btn-outline-primary @BookStoreTutorial.Models.ViewModels.Nav.Active(i, current.PageNumber)">@i</a>
+    }
+}
