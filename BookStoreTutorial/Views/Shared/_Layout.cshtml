@@ -25,19 +25,19 @@
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item @BookStoreTutorial.Models.ViewModels.Nav.Active("Home", current)">
                         <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">
-                            <span class="fas fa-home"></span>Home
+                            <span class="fas fa-home"></span>&nbsp;Home
                         </a>
                     </li>
 
                     <li class="nav-item @BookStoreTutorial.Models.ViewModels.Nav.Active("Book", current)">
                         <a class="nav-link" asp-area="" asp-controller="Book" asp-action="List">
-                            <span class="fas fa-book-open"></span>Books
+                            <span class="fas fa-book-open"></span>&nbsp;Books
                         </a>
                     </li>
 
                     <li class="nav-item @BookStoreTutorial.Models.ViewModels.Nav.Active("Author", current)">
                         <a class="nav-link" asp-area="" asp-controller="Author" asp-action="List">
-                            <span class="fas fa-feather-alt"></span>Authors
+                            <span class="fas fa-feather-alt"></span>&nbsp;Authors
                         </a>
                     </li>
                 </ul>
@@ -45,20 +45,20 @@
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item @BookStoreTutorial.Models.ViewModels.Nav.Active("Cart", current)">
                         <a class="nav-link" asp-area="" asp-controller="Cart" asp-action="Index">
-                            <span class="fas fa-shopping-cart"></span>Cart
+                            <span class="fas fa-shopping-cart"></span>&nbsp;Cart
                             <span class="badge badge-light">@cart.Count</span>
                         </a>
                     </li>
 
                     <li class="nav-item @BookStoreTutorial.Models.ViewModels.Nav.Active("Register", current)">
                         <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Register">
-                            <span class="fas fa-edit"></span>Register
+                            <span class="fas fa-edit"></span>&nbsp;Register
                         </a>
                     </li>
 
                     <li class="nav-item @BookStoreTutorial.Models.ViewModels.Nav.Active("Admin", current)">
                         <a class="nav-link" asp-area="Admin" asp-controller="Book" asp-action="Index">
-                            <span class="fas fa-cog"></span>Admin
+                            <span class="fas fa-cog"></span>&nbsp;Admin
                         </a>
                     </li>
                 </ul>
