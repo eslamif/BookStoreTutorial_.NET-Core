@@ -1,0 +1,67 @@
+﻿@model BookStoreTutorial.Models.ViewModels.AuthorListViewModel
+
+@{
+    ViewData["Title"] = " | Author Catalog";
+    BookStoreTutorial.Models.Grid.RouteDictionary current = Model.CurrentRoute;
+    BookStoreTutorial.Models.Grid.RouteDictionary routes = Model.CurrentRoute.Clone();
+}
+
+<h1>Author Catalog</h1>
+
+<table class="table table-bordered table-striped table-sm">
+    <thead class="thead-dark">
+        <tr>
+            @*First Name*@
+            <th>
+                @{ routes.SetSortAndDirection(nameof(BookStoreTutorial.Models.DomainModels.Author.FirstName), current); }
+                <a asp-controller="Author" asp-action="List" asp-all-route-data="@routes" class="text-white">First Name</a>
+            </th>
+
+            @* Last Name *@
+            <th>
+                @{ routes.SetSortAndDirection(nameof(BookStoreTutorial.Models.DomainModels.Author.LastName), current); }
+                <a asp-controller="Author" asp-action="List" asp-all-route-data="@routes" class="text-white">Last Name</a>
+            </th>
+
+            <th>Books</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (BookStoreTutorial.Models.DomainModels.Author author in Model.Authors)
+        {
+            <tr>
+                @* First Name *@
+                <td>
+                    <a asp-controller="Author" asp-action="Details" asp-route-id="@author.AuthorId">@author.FirstName</a>
+                </td>
+
+                @* Last Name *@
+                <td>
+                    <a asp-controller="Author" asp-action="Details" asp-route-id="@author.AuthorId">@author.LastName</a>
+                </td>
+
+                @* Books *@
+                <td>
+                    @foreach (var ba in author.BookAuthors)
+                    {
+                        <p>
+                            <a asp-controller="Book" asp-action="Details" asp-route-id="@ba.BookId">@ba.Book.Title</a>
+                        </p>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@* Pagination *@
+@{
+    routes = Model.CurrentRoute.Clone();
+
+    for (int i = 1; i <= Model.TotalPages; i++)
+    {
+        routes.PageNumber = i;
+        <a asp-controller="Author" asp-action="List" asp-all-route-data="@routes" class="btn btn-outline-primary @BookStoreTutorial.Models.ViewModels.Nav.Active(i, current.PageNumber)">@i</a>
+    }
+}

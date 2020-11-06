@@ -82,7 +82,7 @@
         </thead>
 
         <tbody>
-            @foreach(BookStoreTutorial.Models.DomainModels.Book book in Model.Books)
+            @foreach (BookStoreTutorial.Models.DomainModels.Book book in Model.Books)
             {
                 <tr>
                     @* Book Title *@
@@ -92,7 +92,7 @@
 
                     @* Author *@
                     <td>
-                        @foreach(var ba in book.BookAuthors)
+                        @foreach (var ba in book.BookAuthors)
                         {
                             <p>
                                 <a asp-controller="Author" asp-action="Details" asp-route-id="@ba.AuthorId">@ba.Author.FullName</a>
@@ -102,7 +102,7 @@
 
                     <td>@book.Genre.Name</td>
                     <td>@book.Price.ToString("c")</td>
-                    
+
                     <td>
                         <button type="submit" name="id" value="@book.BookId" class="btn btn-primary">Add to Cart</button>
                     </td>
@@ -113,7 +113,7 @@
 </form>
 
 @* Pagination *@
-@{ 
+@{
     routes = Model.CurrentRoute.Clone();
 
     for (int i = 1; i <= Model.TotalPages; i++)
