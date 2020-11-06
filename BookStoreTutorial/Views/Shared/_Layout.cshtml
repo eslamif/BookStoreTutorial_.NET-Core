@@ -64,16 +64,16 @@
                 </ul>
             </div>
         </nav>
+
+        <main>
+            @if (TempData.Keys.Contains("message"))
+            {
+                <h4 class="bg-info text-center text-white p-2">@TempData["message"]</h4>
+            }
+
+            @RenderBody()
+        </main>
     </div>
-
-    <main>
-        @if (TempData.Keys.Contains("message"))
-        {
-            <h4 class="bg-info text-center text-white p-2">@TempData["message"]</h4>
-        }
-
-        @RenderBody()
-    </main>
 
     <footer class="border-top footer text-muted">
         <div class="container">
