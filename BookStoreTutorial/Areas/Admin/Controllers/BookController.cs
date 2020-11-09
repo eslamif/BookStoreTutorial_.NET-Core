@@ -106,7 +106,7 @@ namespace BookStoreTutorial.Areas.Admin.Controllers
             {
                 return View("Index");
             }
-        }
+        } 
 
         [HttpGet]
         public ViewResult Add(int id) => GetBook(id, "Add");
@@ -128,6 +128,42 @@ namespace BookStoreTutorial.Areas.Admin.Controllers
                 Load(vm, "Add");
                 return View("Book", vm);
             }
+        }
+
+        [HttpGet]
+        public ViewResult Edit(int id) => GetBook(id, "Edit");
+
+        [HttpPost]
+        public IActionResult Edit(BookViewModel vm)
+        {
+            if (ModelState.IsValid)
+            {
+                data.DeleteCurrentBookAuthors(vm.Book);
+                data.AddNewBookAuthors(vm.Book, vm.SelectedAuthors);
+                data.Books.Update(vm.Book);
+                data.Save();
+
+                TempData["message"] = $"{vm.Book.Title} was updated";
+                return RedirectToAction("Search");
+            }
+            else
+            {
+                Load(vm, "Edit");
+                return RedirectToAction("Book", vm);
+            }
+        }
+
+        [HttpGet]
+        public ViewResult Delete(int id) => GetBook(id, "Delete");
+
+        [HttpPost]
+        public IActionResult Delete(BookViewModel vm)
+        {
+            data.Books.Delete(vm.Book);
+            data.Save();
+
+            TempData["message"] = $"{vm.Book.Title} was deleted";
+            return RedirectToAction("Search");
         }
 
         private void Load(BookViewModel vm, string operation, int? id = null)
