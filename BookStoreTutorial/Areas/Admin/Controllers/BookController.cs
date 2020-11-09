@@ -108,6 +108,28 @@ namespace BookStoreTutorial.Areas.Admin.Controllers
             }
         }
 
+        [HttpGet]
+        public ViewResult Add(int id) => GetBook(id, "Add");
+
+        [HttpPost]
+        public IActionResult Add(BookViewModel vm)
+        {
+            if (ModelState.IsValid)
+            {
+                data.AddNewBookAuthors(vm.Book, vm.SelectedAuthors);
+                data.Books.Insert(vm.Book);
+                data.Save();
+
+                TempData["message"] = $"{vm.Book.Title} was added to Books";
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                Load(vm, "Add");
+                return View("Book", vm);
+            }
+        }
+
         private void Load(BookViewModel vm, string operation, int? id = null)
         {
             if (Operation.IsAdd(operation))
