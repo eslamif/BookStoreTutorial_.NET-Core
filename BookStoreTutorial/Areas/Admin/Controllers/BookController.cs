@@ -59,7 +59,7 @@ namespace BookStoreTutorial.Areas.Admin.Controllers
 
                 var options = new QueryOptions<Book>
                 {
-                    Includes = "Genre, BookAuthors"
+                    Includes = "Genre, BookAuthors.Author"
                 };
 
                 if (search.IsBook)
