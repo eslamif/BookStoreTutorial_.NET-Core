@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BookStoreTutorial.Models.DataLayer;
+using BookStoreTutorial.Models.DomainModels;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -48,6 +50,14 @@ namespace BookStoreTutorial
             services.AddDbContext<BookstoreContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("BookstoreContext"))
             );
+
+            //Add Identity
+            services.AddIdentity<User, IdentityRole>(options =>
+            {
+                options.Password.RequiredLength = 6;
+                options.Password.RequireNonAlphanumeric = true;
+                options.Password.RequireDigit = true;
+            }).AddEntityFrameworkStores<BookstoreContext>().AddDefaultTokenProviders();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -57,8 +67,9 @@ namespace BookStoreTutorial
             app.UseDeveloperExceptionPage();
             app.UseStaticFiles();
             app.UseRouting();
-            app.UseSession();           //Enable sessions
+            app.UseAuthentication();    //Must be above authorization. For identity
             app.UseAuthorization();
+            app.UseSession();           //Enable sessions
 
             //endpoints order matters. Go from specific to general
             app.UseEndpoints(endpoints =>
@@ -87,6 +98,9 @@ namespace BookStoreTutorial
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}/{slug?}");
             });
+
+            //Create admin user in Idendity
+            BookstoreContext.CreateAdminUser(app.ApplicationServices).Wait();
         }
     }
 }

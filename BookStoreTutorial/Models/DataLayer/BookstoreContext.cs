@@ -1,14 +1,19 @@
 ﻿using BookStoreTutorial.Models.DataLayer.SeedData;
 using BookStoreTutorial.Models.DomainModels;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace BookStoreTutorial.Models.DataLayer
 {
-    public class BookstoreContext : DbContext
+    public class BookstoreContext : IdentityDbContext<User>
     {
         public BookstoreContext(DbContextOptions<BookstoreContext> options) : base(options) { }
 
@@ -19,6 +24,9 @@ namespace BookStoreTutorial.Models.DataLayer
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //For IdentityDbContext
+            base.OnModelCreating(modelBuilder);
+
             //Create many-to-many relationship for BookAuthor with Fluent API
             //Create composite key
             modelBuilder.Entity<BookAuthor>().HasKey(ba => new { ba.BookId, ba.AuthorId });
@@ -43,6 +51,35 @@ namespace BookStoreTutorial.Models.DataLayer
             modelBuilder.ApplyConfiguration(new SeedBooks());
             modelBuilder.ApplyConfiguration(new SeedAuthors());
             modelBuilder.ApplyConfiguration(new SeedBookAuthors());
+        }
+
+        public static async Task CreateAdminUser(IServiceProvider serviceProvider)
+        {
+            //Create an admin and role for the first time
+            UserManager<User> userManager = serviceProvider.GetRequiredService<UserManager<User>>();
+            RoleManager<IdentityRole> roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+
+            string username = "admin";
+            string password = "Password";
+            string roleName = "Admin";
+
+            //Create role if it doesn't exist
+            if (await roleManager.FindByNameAsync(roleName) == null)
+            {
+                await roleManager.CreateAsync(new IdentityRole(roleName));
+            }
+
+            //Create the user if it doesn't exist
+            if (await userManager.FindByNameAsync(username) == null)
+            {
+                User user = new User { UserName = username };
+                var result = await userManager.CreateAsync(user, password);
+
+                if (result.Succeeded)
+                {
+                    await userManager.AddToRoleAsync(user, roleName);
+                }
+            }
         }
     }
 }
