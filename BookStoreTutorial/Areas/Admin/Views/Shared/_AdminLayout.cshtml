@@ -15,7 +15,13 @@
 <ul class="nav nav-tabs mt-2 mb-3">
     <li class="nav-item">
         <a asp-controller="Book" asp-action="Index" class="nav-link @BookStoreTutorial.Models.ViewModels.Nav.Active("Book", current)">Manage Books</a>
+    </li>
+
+    <li class="nav-item">
         <a asp-controller="Author" asp-action="Index" class="nav-link @BookStoreTutorial.Models.ViewModels.Nav.Active("Author", current)">Manage Authors</a>
+    </li>
+
+    <li class="nav-item">
         <a asp-controller="Genre" asp-action="Index" class="nav-link @BookStoreTutorial.Models.ViewModels.Nav.Active("Genre", current)">Manage Genres</a>
     </li>
 </ul>
