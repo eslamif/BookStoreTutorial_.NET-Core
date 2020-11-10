@@ -1,0 +1,23 @@
+﻿@{ 
+    //Main layout for nested view
+    Layout = "_Layout";     
+
+    //Determine active tab
+    var current = ViewContext.RouteData.Values["controller"]?.ToString();
+}
+
+@* JQuery validations *@
+@section scripts {
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}
+
+<ul class="nav nav-tabs mt-2 mb-3">
+    <li class="nav-item">
+        <a asp-controller="Book" asp-action="Index" class="nav-link @BookStoreTutorial.Models.ViewModels.Nav.Active("Book", current)">Manage Books</a>
+        <a asp-controller="Author" asp-action="Index" class="nav-link @BookStoreTutorial.Models.ViewModels.Nav.Active("Author", current)">Manage Authors</a>
+        <a asp-controller="Genre" asp-action="Index" class="nav-link @BookStoreTutorial.Models.ViewModels.Nav.Active("Genre", current)">Manage Genres</a>
+    </li>
+</ul>
+
+@RenderBody()
