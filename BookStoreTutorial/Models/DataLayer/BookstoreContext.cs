@@ -60,7 +60,7 @@ namespace BookStoreTutorial.Models.DataLayer
             RoleManager<IdentityRole> roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
             string username = "admin";
-            string password = "Password";
+            string password = "Password@2020";
             string roleName = "Admin";
 
             //Create role if it doesn't exist
