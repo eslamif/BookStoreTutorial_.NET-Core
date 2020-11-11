@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BookStoreTutorial.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class UserController : Controller
     {
         private UserManager<User> userManager;

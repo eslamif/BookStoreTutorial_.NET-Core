@@ -24,6 +24,10 @@
     <li class="nav-item">
         <a asp-controller="Genre" asp-action="Index" class="nav-link @BookStoreTutorial.Models.ViewModels.Nav.Active("Genre", current)">Manage Genres</a>
     </li>
+
+    <li class="nav-item">
+        <a asp-controller="User" asp-action="Index" class="nav-link @BookStoreTutorial.Models.ViewModels.Nav.Active("User", current)">Manage Users</a>
+    </li>
 </ul>
 
 @RenderBody()
