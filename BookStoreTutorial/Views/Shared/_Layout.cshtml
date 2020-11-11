@@ -53,8 +53,7 @@
                     @* User log in/out *@
                     @using Microsoft.AspNetCore.Identity
                     @inject SignInManager<BookStoreTutorial.Models.DomainModels.User> signInManager
-                    @if (signInManager.IsSignedIn(User))
-                    {
+                    @if (signInManager.IsSignedIn(User)) {
                         <li class="nav-item">
                             <form method="post" asp-controller="Account" asp-action="Logout" asp-area="">
                                 <input type="submit" value="Log Out" class="btn btn-outline-light" />
@@ -62,19 +61,18 @@
                             </form>
                         </li>
                     }
-                    else
-                    {
+                    else {
                         var action = ViewContext.RouteData.Values["action"]?.ToString();
                         <li class="nav-item @BookStoreTutorial.Models.ViewModels.Nav.Active("Register", action)">
                             <a asp-controller="Account" asp-action="Register" asp-area="" class="nav-link">
                                 <span class="fas fa-edit"></span>&nbsp;Register
                             </a>
                         </li>
-                    }
 
-                    <li class="nav-item">
-                        <a asp-controller="Account" asp-action="Login" asp-area="" class="btn btn-outline-light">Log In</a>
-                    </li>
+                        <li class="nav-item">
+                            <a asp-controller="Account" asp-action="Login" asp-area="" class="btn btn-outline-light">Log In</a>
+                        </li>
+                    }
 
                     <li class="nav-item @BookStoreTutorial.Models.ViewModels.Nav.Active("Admin", current)">
                         <a class="nav-link" asp-area="Admin" asp-controller="Book" asp-action="Index">

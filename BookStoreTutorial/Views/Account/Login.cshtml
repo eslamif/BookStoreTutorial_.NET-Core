@@ -1,14 +1,14 @@
-﻿@model BookStoreTutorial.Models.ViewModels.RegisterViewModel
+﻿@model BookStoreTutorial.Models.ViewModels.LoginViewModel
 
-@{
-    ViewBag.Title = "Register";
+@{ 
+    ViewBag.Title = "Login";
 }
 
-<h2>Register</h2>
+<h2>Login</h2>
 
 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-<form method="post" asp-controller="Account" asp-action="Register">
+<form method="post" asp-controller="Account" asp-action="Login" asp-route-returnUrl="@Model.ReturnUrl">
     @* Username *@
     <div class="form-group row">
         <div class="col-sm-2">
@@ -39,30 +39,22 @@
         </div>
     </div>
 
-    @* Confirm Password *@
     <div class="form-group row">
-        <div class="col-sm-2">
-            <label>Confirm Password:</label>
-        </div>
-
-        <div class="col-sm-4">
-            <input type="password" asp-for="ConfirmPassword" class="form-control" />
-        </div>
-
-        <div class="col">
-            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+        <div class="col-sm-4 offset-2">
+            <input type="checkbox" title="Remember Me" asp-for="RememberMe" class="form-check-inline" />
+            <label asp-for="RememberMe">Remember Me</label>
         </div>
     </div>
 
     <div class="row">
         <div class="col-sm-4 offset-2">
-            <button type="submit" class="btn btn-primary">Register</button>
+            <button type="submit" class="btn btn-primary">Log In</button>
         </div>
     </div>
 
     <div class="row">
         <div class="col-sm-4 offset-2">
-            Already Registered? <a asp-controller="Account" asp-action="Login">Log In</a>
+            Not Registered? <a asp-controller="Account" asp-action="Register">Register</a>
         </div>
     </div>
 </form>
