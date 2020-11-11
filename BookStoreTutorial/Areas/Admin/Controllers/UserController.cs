@@ -93,7 +93,7 @@ namespace BookStoreTutorial.Areas.Admin.Controllers
                 }
             }
 
-            return View(model);
+            return RedirectToAction("Index");
         }
 
         [HttpPost]
