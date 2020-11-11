@@ -6,10 +6,12 @@ using BookStoreTutorial.Areas.Admin.Models;
 using BookStoreTutorial.Models.DataLayer;
 using BookStoreTutorial.Models.DataLayer.Repositories;
 using BookStoreTutorial.Models.DomainModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookStoreTutorial.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     [Area("Admin")]
     public class GenreController : Controller
     {

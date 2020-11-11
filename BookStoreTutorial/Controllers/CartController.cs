@@ -8,10 +8,15 @@ using BookStoreTutorial.Models.DataTransferObjects;
 using BookStoreTutorial.Models.DomainModels;
 using BookStoreTutorial.Models.Grid;
 using BookStoreTutorial.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookStoreTutorial.Controllers
 {
+    /// <summary>
+    /// Anyone who is logged in is authorized to view the cart
+    /// </summary>
+    [Authorize]
     public class CartController : Controller
     {
         private Repository<Book> Data { get; set; }

@@ -5,11 +5,13 @@ using System.Threading.Tasks;
 using BookStoreTutorial.Areas.Admin.Models;
 using BookStoreTutorial.Models.DomainModels;
 using BookStoreTutorial.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookStoreTutorial.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     [Area("Admin")]
     public class UserController : Controller
     {
